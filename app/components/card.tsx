@@ -1,35 +1,27 @@
-import { Card, CardContent, CardHeader, CardMedia, Typography } from '@mui/material'
+import { Card, CardActionArea, CardHeader, CardMedia } from '@mui/material'
 
-interface Film {
-  film: {
-    id: string;
-    title: string;
-    image: string;
-    movie_banner: string;
-    description: string;
-    director: string;
-    producer: string;
-    release_date: string;
-    rt_score: string;
-    original_title: string;
-    original_title_romaized: string;
-    url: string;
-  };
-}
+import { DetailContextType, FilmProps } from '../utils/film'
 
-export default function FilmCard({ film }: Film) {
-  console.log(film)
+import { useContext } from 'react'
+
+import { DetailContext } from '../utils/film'
+
+export default function FilmCard({ film }: FilmProps) {
+  let { detail, setDetail } = useContext(DetailContext) as DetailContextType
+
+  function handleFilmClick() {
+    film === detail ? setDetail(undefined) : setDetail(film)
+  }
 
   return (
     <Card>
-      <CardHeader title={film.title} />
-      <CardMedia
-        component='img'
-        src={film.image}
-      />
-      <CardContent>
-        <Typography>{film.description}</Typography>
-      </CardContent>
+      <CardActionArea onClick={handleFilmClick}>
+        <CardMedia
+          component='img'
+          src={film.image}
+        />
+        <CardHeader title={film.title} />
+      </CardActionArea>
     </Card>
   )
 }
