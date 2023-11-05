@@ -1,4 +1,4 @@
-import { Card, CardHeader } from "@mui/material";
+import { Card, CardContent, CardHeader, CardMedia, Typography } from '@mui/material'
 
 interface Film {
   film: {
@@ -23,6 +23,13 @@ export default function FilmCard({ film }: Film) {
   return (
     <Card>
       <CardHeader title={film.title} />
+      <CardMedia
+        component='img'
+        src={film.image}
+      />
+      <CardContent>
+        <Typography>{film.description}</Typography>
+      </CardContent>
     </Card>
   )
 }

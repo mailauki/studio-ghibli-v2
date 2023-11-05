@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react'
 
 import FilmCard from './card'
-import { Stack, Typography } from '@mui/material';
+import { Grid, Stack, Typography } from '@mui/material';
 
 interface Film {
   id: string;
@@ -34,8 +34,15 @@ export default function CardContainer() {
   if (films.length === 0) return <Typography variant='h1'>No Films Found</Typography>
 
   return (
-    <Stack direction='row' spacing={2} flexWrap='wrap' useFlexGap>
-      {films.map((film: Film) => <FilmCard key={film.id} film={film} />)}
-    </Stack>
+    // <Stack direction='row' spacing={2} flexWrap='wrap' useFlexGap>
+    //   {films.map((film: Film) => <FilmCard key={film.id} film={film} />)}
+    // </Stack>
+    <Grid container spacing={1}>
+      {films.map((film: Film) => 
+        <Grid item key={film.id} xs={4}>
+          <FilmCard film={film} />
+        </Grid>
+      )}
+    </Grid>
   )
 }
