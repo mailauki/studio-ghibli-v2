@@ -3,13 +3,13 @@ import { Card, CardContent, CardHeader, CardMedia, Typography } from '@mui/mater
 import { DetailProps } from "../utils/film"
 
 export default function CardDetail({ detail }: DetailProps) {
-  if (!detail) return <Typography>No Detail</Typography>
+  if (!detail) return <></>
 
   return (
     <Card>
         <CardMedia
           component='img'
-          src={detail.image}
+          src={detail.movie_banner}
         />
         <CardHeader title={detail.title} />
         <CardContent>
