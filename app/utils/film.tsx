@@ -11,7 +11,8 @@ export interface Film {
   release_date: string;
   rt_score: string;
   original_title: string;
-  original_title_romaized: string;
+  original_title_romanised: string;
+  running_time: string;
   url: string;
 }
 
