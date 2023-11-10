@@ -1,4 +1,4 @@
-import { Avatar, Box, Card, CardContent, CardHeader, CardMedia, IconButton, Stack, Typography } from '@mui/material'
+import { Avatar, Box, Card, CardContent, CardHeader, CardMedia, IconButton, Skeleton, Stack, Typography } from '@mui/material'
 
 import { DetailProps } from "../utils/film"
 
@@ -7,12 +7,32 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { Star } from '@mui/icons-material'
 
 export default function CardDetail({ detail }: DetailProps) {
-  if (!detail) return <></>
+  if (!detail) {
+    return (
+      <Card sx={{ position: 'sticky', top: 8 }}>
+        {/* <CardMedia><Skeleton height={315} /></CardMedia> */}
+        {/* <CardMedia component={Skeleton} height={315} /> */}
+        <Skeleton
+          animation='wave'
+          variant='rectangular'
+          height={315}
+          // sx={{ flexGrow: 1 }}
+        />
+        <CardHeader
+          title='Loading...'
+        />
+        <CardContent sx={{ flex: '1 1 auto', flexGrow: 1 }}>
+          <Skeleton animation='wave' variant='text' />
+          <Skeleton animation='wave' variant='text' width='80%' />
+        </CardContent>
+      </Card>
+    )
+  }
 
-  console.log(detail)
+  // console.log(detail)
 
   return (
-    <Card sx={{ position: 'sticky', top: 10 }}>
+    <Card sx={{ position: 'sticky', top: 8 }}>
       <Box sx={{ position: 'absolute', width: '100%' }}>
         <CardHeader
           avatar={
@@ -42,7 +62,6 @@ export default function CardDetail({ detail }: DetailProps) {
         src={detail.movie_banner}
       />
       <CardContent>
-
         <Stack direction='row' spacing={1} alignItems='center' justifyContent='space-between'>
           <Typography variant='h4'>{detail.title}</Typography>
           <Typography>{detail.release_date}</Typography>
