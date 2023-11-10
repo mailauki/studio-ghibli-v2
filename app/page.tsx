@@ -3,7 +3,7 @@
 import CardContainer from './components/container'
 import CardDetail from './components/detail'
 
-import { AppBar, Box, Button, Collapse, Container, CssBaseline, Drawer, IconButton, Paper, Stack, Toolbar, Typography, collapseClasses } from '@mui/material'
+import { AppBar, Box, Button, Collapse, Container, CssBaseline, Drawer, IconButton, Paper, Stack, Toolbar, Typography, collapseClasses, useMediaQuery } from '@mui/material'
 
 import { useState } from 'react'
 
@@ -33,12 +33,14 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   }),
   // marginRight: -drawerWidth,
   marginRight: '-50%',
+  // marginRight: matches ? '-50%' : 0,
   ...(open && {
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    marginRight: 0
+    marginRight: 0,
+    // width: '100%'
   }),
   /**
    * This is necessary to enable the selection of content. In the DOM, the stacking order is determined
@@ -52,41 +54,11 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
 export default function Home() {
   const [detail, setDetail] = useState<Film | undefined>(undefined)
   const [open, setOpen] = useState(false)
+  const matches = useMediaQuery('(min-width:600px)')
 
   return (
     <DetailContext.Provider value={{ detail, setDetail }}>
       <Container maxWidth='lg'>
-        {/* <Stack direction='row' spacing={2} justifyContent='space-between'>
-          <Collapse orientation='horizontal' in={!open} collapsedSize={'50%'}>
-            <Button onClick={() => setOpen((prev) => !prev)}>Open</Button>
-            <CardContainer />
-          </Collapse>
-
-          <Collapse 
-            orientation='horizontal' 
-            in={open} 
-            style={{
-              width: '100%',
-            }}
-            sx={{
-              width: '100%',
-              [`.${collapseClasses}`]: {
-                width: '100%'
-              },
-              [`.${collapseClasses.root}`]: {
-                width: '100%'
-              },
-              [`.${collapseClasses.wrapper}`]: {
-                width: '100%'
-              },
-              [`.${collapseClasses.wrapperInner}`]: {
-                width: '100%'
-              }
-            }}
-          >
-            <CardDetail detail={detail} />
-          </Collapse>
-        </Stack> */}
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
           <AppBar position='fixed' sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
@@ -105,14 +77,24 @@ export default function Home() {
             </Toolbar>
           </AppBar>
 
-          <Main open={open}>
-            <Toolbar />
-            <CardContainer />
-          </Main>
+          {matches ? (
+            <Main open={open}>
+              <Toolbar />
+              <CardContainer />
+            </Main>
+          ) : (
+            <Box sx={{ pt: 3 }}>
+              <Toolbar />
+              <CardContainer />
+            </Box>
+          )}
 
           <Drawer
+            variant={matches ? 'persistent' : 'temporary'}
+            anchor='right'
+            open={open}
             sx={{
-              width: drawerWidth,
+              width: matches ? drawerWidth : '100%',
               flexShrink: 0,
               '& .MuiDrawer-paper': {
                 width: '100%',
@@ -120,12 +102,9 @@ export default function Home() {
                 border: 'none'
               }
             }}
-            variant='persistent'
-            anchor='right'
-            open={open}
           >
             <Toolbar />
-            <Box sx={{ pt: 3 }}>
+            <Box sx={{ pt: 3, p: matches ? '' : 3 }}>
               <CardDetail detail={detail} />
             </Box>
           </Drawer>
