@@ -3,19 +3,12 @@
 import CardContainer from './components/container'
 import CardDetail from './components/detail'
 
-import { AppBar, Box, Button, Collapse, Container, CssBaseline, Drawer, IconButton, Paper, Stack, Toolbar, Typography, collapseClasses, useMediaQuery } from '@mui/material'
+import { AppBar, Box, Container, CssBaseline, Drawer, IconButton, Toolbar, Typography, useMediaQuery } from '@mui/material'
 
 import { useState } from 'react'
 
 import { DetailContext, Film } from './utils/film'
 import { styled } from '@mui/material/styles';
-// import Box from '@mui/material/Box';
-// import Drawer from '@mui/material/Drawer'
-// import AppBar from '@mui/material/AppBar';
-// import Toolbar from '@mui/material/Toolbar'
-// import CssBaseline from '@mui/material/CssBaseline'
-// import Typography from '@mui/material/Typography'
-// import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import CloseIcon from '@mui/icons-material/Close'
 
@@ -29,7 +22,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   padding: theme.spacing(3),
   transition: theme.transitions.create('margin', {
     easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
+    duration: theme.transitions.duration.leavingScreen
   }),
   // marginRight: -drawerWidth,
   marginRight: '-50%',
@@ -37,10 +30,9 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   ...(open && {
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
+      duration: theme.transitions.duration.enteringScreen
     }),
-    marginRight: 0,
-    // width: '100%'
+    marginRight: 0
   }),
   /**
    * This is necessary to enable the selection of content. In the DOM, the stacking order is determined
@@ -48,7 +40,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
    * those that appear earlier. Since the Drawer comes after the Main content, this adjustment ensures
    * proper interaction with the underlying content.
    */
-  position: 'relative',
+  position: 'relative'
 }));
 
 export default function Home() {
@@ -56,27 +48,37 @@ export default function Home() {
   const [open, setOpen] = useState(false)
   const matches = useMediaQuery('(min-width:600px)')
 
+  function handleDrawerOpen() {
+    // setOpen((prev) => !prev)
+    setOpen(true)
+  }
+  
+  function handleDrawerClose() {
+    setDetail(undefined)
+    setOpen(false)
+  }
+
   return (
-    <DetailContext.Provider value={{ detail, setDetail }}>
+    <DetailContext.Provider value={{ detail, setDetail, handleDrawerOpen, handleDrawerClose }}>
+      <CssBaseline />
+      {/* <AppBar position='fixed' sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+        <Toolbar>
+          <Typography variant='h6' noWrap component='div' flexGrow={1}>
+            Studio Ghibli
+          </Typography>
+          <IconButton
+            color='inherit'
+            aria-label='open drawer'
+            onClick={() => setOpen((prev) => !prev)}
+            edge='end'
+          >
+            {open ? <CloseIcon /> : <MenuIcon />}
+          </IconButton>
+        </Toolbar>
+      </AppBar> */}
+
       <Container maxWidth='lg'>
         <Box sx={{ display: 'flex' }}>
-          <CssBaseline />
-          <AppBar position='fixed' sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-            <Toolbar>
-              <Typography variant='h6' noWrap component='div' flexGrow={1}>
-                Studio Ghibli
-              </Typography>
-              <IconButton
-                color='inherit'
-                aria-label='open drawer'
-                onClick={() => setOpen((prev) => !prev)}
-                edge='end'
-              >
-                {open ? <CloseIcon /> : <MenuIcon />}
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-
           {matches ? (
             <Main open={open}>
               <Toolbar />
@@ -103,9 +105,19 @@ export default function Home() {
               }
             }}
           >
-            <Toolbar />
-            <Box sx={{ pt: 3, p: matches ? '' : 3 }}>
-              <CardDetail detail={detail} />
+            {/* <Toolbar /> */}
+            <Box
+              sx={{
+                pt: 3,
+                pl: matches ? 0 : 3,
+                pr: 3,
+                pb: 3,
+                position: 'fixed',
+                top: 0
+              }}
+            >
+              <Toolbar />
+              <CardDetail />
             </Box>
           </Drawer>
         </Box>

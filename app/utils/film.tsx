@@ -14,19 +14,27 @@ export interface Film {
   original_title_romanised: string;
   running_time: string;
   url: string;
-}
+};
 
 export interface FilmProps {
-  film: Film;
-}
+  film: Film | undefined;
+};
 
 export interface DetailProps {
   detail: Film | undefined;
-}
+};
 
 export type DetailContextType = {
   detail: Film | undefined,
-  setDetail: (film: Film | undefined) => void
+  setDetail: (film: Film | undefined) => void,
+  handleDrawerOpen: () => void,
+  handleDrawerClose: () => void
 };
 
 export const DetailContext = createContext<DetailContextType | undefined>(undefined);
+
+export type DrawerContextType = {
+  open: boolean;
+};
+
+export const DrawerContext = createContext<DrawerContextType | undefined>(undefined);

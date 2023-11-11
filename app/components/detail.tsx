@@ -1,22 +1,23 @@
+import { useContext } from 'react'
+
 import { Avatar, Box, Card, CardContent, CardHeader, CardMedia, IconButton, Skeleton, Stack, Typography } from '@mui/material'
 
-import { DetailProps } from "../utils/film"
+import { DetailContext, DetailContextType, DetailProps } from "../utils/film"
 
 import CloseIcon from '@mui/icons-material/Close'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { Star } from '@mui/icons-material'
 
-export default function CardDetail({ detail }: DetailProps) {
+export default function CardDetail() {
+  let { detail, handleDrawerClose } = useContext(DetailContext) as DetailContextType
+
   if (!detail) {
     return (
-      <Card sx={{ position: 'sticky', top: 8 }}>
-        {/* <CardMedia><Skeleton height={315} /></CardMedia> */}
-        {/* <CardMedia component={Skeleton} height={315} /> */}
+      <Card>
         <Skeleton
           animation='wave'
           variant='rectangular'
           height={315}
-          // sx={{ flexGrow: 1 }}
         />
         <CardHeader
           title='Loading...'
@@ -50,7 +51,7 @@ export default function CardDetail({ detail }: DetailProps) {
             </Avatar>
           }
           action={
-            <IconButton>
+            <IconButton onClick={handleDrawerClose}>
               <CloseIcon sx={{ color: 'white' }} />
             </IconButton>
           }

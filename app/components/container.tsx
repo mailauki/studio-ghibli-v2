@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react'
 
 import FilmCard from './card'
 
-import { Grid, Typography } from '@mui/material'
+import { Grid } from '@mui/material'
 
 import { Film } from '../utils/film'
 
@@ -17,14 +17,27 @@ export default function CardContainer() {
     .then((data) => setFilms(data))
   }, [])
 
-  
-
-  if (films.length === 0) return <Typography variant='h1'>No Films Found</Typography>
+  if (!films || films.length === 0) {
+    return (
+      <Grid container spacing={1}>
+        {Array.from(Array(6)).map((_, index) =>
+          <Grid
+            key={index}
+            item
+            xs={4}
+            sx={{ width: 'calc((100vw - 48px) / 3)' }}
+          >
+            <FilmCard film={undefined} />
+          </Grid>
+        )}
+      </Grid>
+    )
+  }
 
   return (
     <Grid container spacing={1}>
       {films.map((film: Film) => 
-        <Grid item key={film.id} xs={4}>
+        <Grid key={film.id} item xs={4}>
           <FilmCard film={film} />
         </Grid>
       )}
