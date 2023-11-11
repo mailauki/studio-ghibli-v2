@@ -20,10 +20,6 @@ export interface FilmProps {
   film: Film | undefined;
 };
 
-export interface DetailProps {
-  detail: Film | undefined;
-};
-
 export type DetailContextType = {
   detail: Film | undefined,
   setDetail: (film: Film | undefined) => void,
@@ -32,9 +28,3 @@ export type DetailContextType = {
 };
 
 export const DetailContext = createContext<DetailContextType | undefined>(undefined);
-
-export type DrawerContextType = {
-  open: boolean;
-};
-
-export const DrawerContext = createContext<DrawerContextType | undefined>(undefined);

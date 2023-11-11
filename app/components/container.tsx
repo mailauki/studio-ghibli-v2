@@ -8,7 +8,7 @@ import { Grid } from '@mui/material'
 
 import { Film } from '../utils/film'
 
-export default function CardContainer() {
+export default function CardContainer({ open }: { open: boolean }) {
   const [films, setFilms] = useState([])
 
   useMemo(() => {
@@ -20,11 +20,11 @@ export default function CardContainer() {
   if (!films || films.length === 0) {
     return (
       <Grid container spacing={1}>
-        {Array.from(Array(6)).map((_, index) =>
+        {Array.from(Array(12)).map((_, index) =>
           <Grid
             key={index}
             item
-            xs={4}
+            xs={6} sm={4} md={3} lg={2}
             sx={{ width: 'calc((100vw - 48px) / 3)' }}
           >
             <FilmCard film={undefined} />
@@ -37,7 +37,7 @@ export default function CardContainer() {
   return (
     <Grid container spacing={1}>
       {films.map((film: Film) => 
-        <Grid key={film.id} item xs={4}>
+        <Grid key={film.id} item xs={6} sm={4} md={3} lg={2}>
           <FilmCard film={film} />
         </Grid>
       )}

@@ -2,10 +2,9 @@ import { useContext } from 'react'
 
 import { Avatar, Box, Card, CardContent, CardHeader, CardMedia, IconButton, Skeleton, Stack, Typography } from '@mui/material'
 
-import { DetailContext, DetailContextType, DetailProps } from "../utils/film"
+import { DetailContext, DetailContextType } from "../utils/film"
 
 import CloseIcon from '@mui/icons-material/Close'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { Star } from '@mui/icons-material'
 
 export default function CardDetail() {
@@ -33,7 +32,7 @@ export default function CardDetail() {
   // console.log(detail)
 
   return (
-    <Card sx={{ position: 'sticky', top: 8 }}>
+    <Card sx={{ position: 'sticky', top: 0 }}>
       <Box sx={{ position: 'absolute', width: '100%' }}>
         <CardHeader
           avatar={

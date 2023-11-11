@@ -39,7 +39,7 @@ export default function FilmCard({ film }: FilmProps) {
   }
 
   return (
-    <Card sx={{ position: 'relative' }}>
+    <Card sx={{ position: 'relative', height: '100%' }}>
       <CardActionArea onClick={handleFilmClick}>
         <CardMedia
           component='img'
@@ -48,6 +48,7 @@ export default function FilmCard({ film }: FilmProps) {
         <CardHeader
           title={<Typography variant='body2'>{film.title}</Typography>}
           subheader={<Typography variant='body2' color='text.secondary'>{`${film.release_date} • ${film.director}`}</Typography>}
+          sx={{ flex: '1 1 auto' }}
         />
       </CardActionArea>
       <CardActions sx={{ position: 'absolute', top: 0, p: 0 }}>
