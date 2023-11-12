@@ -8,10 +8,11 @@ import CardContainer from './components/container'
 import CardDetail from './components/detail'
 import Filter from './components/filter'
 
-import { AppBar, Box, Container, CssBaseline, Drawer, Toolbar, Typography, useMediaQuery } from '@mui/material'
+import { Box, Container, CssBaseline, Drawer, Toolbar, useMediaQuery } from '@mui/material'
 import { SelectChangeEvent } from '@mui/material/Select'
 
 import { DetailContext, Film } from './utils/film'
+import Header from './components/header'
 
 // const drawerWidth = 600
 const drawerWidth = '50vw'
@@ -20,7 +21,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   open?: boolean;
 }>(({ theme, open }) => ({
   flexGrow: 1,
-  padding: theme.spacing(3),
+  // padding: theme.spacing(3),
   transition: theme.transitions.create('margin', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen
@@ -60,32 +61,24 @@ export default function Home() {
   return (
     <DetailContext.Provider value={{ detail, setDetail, handleDrawerOpen, handleDrawerClose, open, filter, handleFilterChange }}>
       <CssBaseline />
-      <AppBar position='fixed' sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-        <Toolbar>
-          <Typography variant='h6' noWrap component='div' flexGrow={1}>
-            Studio Ghibli
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <Header />
 
       {/* <Container maxWidth='lg'> */}
         <Box sx={{ display: 'flex' }}>
           {matches ? (
             <Main open={open}>
-              <Toolbar />
               <Filter />
               <CardContainer />
             </Main>
           ) : (
-            <Box sx={{ p: 3 }}>
-              <Toolbar />
+            <Box >
+              <Filter />
               <CardContainer />
             </Box>
           )}
 
           <Drawer
             variant={matches ? 'persistent' : 'temporary'}
-            // variant='persistent'
             anchor='right'
             open={open}
             sx={{

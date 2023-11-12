@@ -30,7 +30,7 @@ export default function CardContainer() {
 
   if (!films || films.length === 0) {
     return (
-      <Grid container spacing={1}>
+      <Grid container spacing={1} sx={{ pl: 3, pr: 3, pb: 4 }}>
         {Array.from(Array(12)).map((_, index) =>
           <Grid
             key={index}
@@ -46,7 +46,7 @@ export default function CardContainer() {
   }
 
   return (
-    <Grid container spacing={1}>
+    <Grid container spacing={1} sx={{ pl: 3, pr: 3, pb: 4 }}>
       {filteredFilms.map((film: Film) => 
         <Grid key={film.id} item xs={6} sm={4} md={3} lg={2}>
           <FilmCard film={film} />
