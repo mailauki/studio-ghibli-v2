@@ -19,14 +19,14 @@ export default function Filter() {
         onChange={handleFilterChange}
       >
         <MenuItem value=''><em>None</em></MenuItem>
-        <MenuItem value='watched'>Watched</MenuItem>
-        <MenuItem value='not-watched'>Not Watched</MenuItem>
+        <MenuItem value='Watched' disabled>Watched</MenuItem>
+        <MenuItem value='Not Watched' disabled>Not Watched</MenuItem>
           <ListSubheader>Director</ListSubheader>
-          <MenuItem sx={{ pl: 4 }} value='hayao-miyazaki'>Hayao Miyazaki</MenuItem>
-          <MenuItem sx={{ pl: 4 }} value='isao-takahata'>Isao Takahata</MenuItem>
-          <MenuItem sx={{ pl: 4 }} value='yoshifumi-kondo'>Yoshifumi Kondō</MenuItem>
-          <MenuItem sx={{ pl: 4 }} value='hiroyuki-morita'>Hiroyuki Morita</MenuItem>
-          <MenuItem sx={{ pl: 4 }} value='goro-miyazaki'>Gorō Miyazaki</MenuItem>
+          <MenuItem sx={{ pl: 4 }} value='Hayao Miyazaki'>Hayao Miyazaki</MenuItem>
+          <MenuItem sx={{ pl: 4 }} value='Isao Takahata'>Isao Takahata</MenuItem>
+          <MenuItem sx={{ pl: 4 }} value='Yoshifumi Kondō'>Yoshifumi Kondō</MenuItem>
+          <MenuItem sx={{ pl: 4 }} value='Hiroyuki Morita'>Hiroyuki Morita</MenuItem>
+          <MenuItem sx={{ pl: 4 }} value='Gorō Miyazaki'>Gorō Miyazaki</MenuItem>
       </Select>
     </FormControl>
   )

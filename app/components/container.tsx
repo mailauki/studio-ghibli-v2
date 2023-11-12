@@ -1,21 +1,32 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useContext, useMemo, useState } from 'react'
 
 import FilmCard from './card'
 
 import { Grid } from '@mui/material'
 
-import { Film } from '../utils/film'
+import { DetailContext, DetailContextType, Film } from '../utils/film'
 
 export default function CardContainer() {
   const [films, setFilms] = useState([])
+  let { filter } = useContext(DetailContext) as DetailContextType
+  const [filteredFilms, setFilteredFilms] = useState(films)
 
   useMemo(() => {
     fetch("https://ghibliapi.vercel.app/films")
     .then((res) => res.json())
     .then((data) => setFilms(data))
   }, [])
+
+  useMemo(() => {
+    if(filter) {
+      setFilteredFilms(films.filter((film: Film) => film.director == filter))
+    }
+    else {
+      setFilteredFilms(films)
+    }
+  }, [films, filter])
 
   if (!films || films.length === 0) {
     return (
@@ -36,7 +47,7 @@ export default function CardContainer() {
 
   return (
     <Grid container spacing={1}>
-      {films.map((film: Film) => 
+      {filteredFilms.map((film: Film) => 
         <Grid key={film.id} item xs={6} sm={4} md={3} lg={2}>
           <FilmCard film={film} />
         </Grid>
