@@ -8,7 +8,7 @@ import { Grid } from '@mui/material'
 
 import { Film } from '../utils/film'
 
-export default function CardContainer({ open }: { open: boolean }) {
+export default function CardContainer() {
   const [films, setFilms] = useState([])
 
   useMemo(() => {

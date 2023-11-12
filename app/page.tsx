@@ -6,11 +6,12 @@ import { styled } from '@mui/material/styles'
 
 import CardContainer from './components/container'
 import CardDetail from './components/detail'
+import Filter from './components/filter'
 
-import { AppBar, Box, Collapse, Container, CssBaseline, Drawer, FormControl, InputLabel, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader, MenuItem, Select, Toolbar, Typography, useMediaQuery } from '@mui/material'
+import { AppBar, Box, Container, CssBaseline, Drawer, Toolbar, Typography, useMediaQuery } from '@mui/material'
+import { SelectChangeEvent } from '@mui/material/Select'
 
 import { DetailContext, Film } from './utils/film'
-import { ExpandLess, ExpandMore, Inbox, StarBorder } from '@mui/icons-material'
 
 // const drawerWidth = 600
 const drawerWidth = '50vw'
@@ -50,18 +51,14 @@ export default function Home() {
     setOpen(false)
   }
 
-  const [filter, setFilter] = useState(undefined)
-  const [filterOpen, setFilterOpen] = useState(true)
+  const [filter, setFilter] = useState('')
 
-  function handleFilterChange() {
-  }
-
-  const handleClick = () => {
-    setFilterOpen(!filterOpen)
+  function handleFilterChange(event: SelectChangeEvent) {
+    setFilter(event.target.value as string)
   }
 
   return (
-    <DetailContext.Provider value={{ detail, setDetail, handleDrawerOpen, handleDrawerClose }}>
+    <DetailContext.Provider value={{ detail, setDetail, handleDrawerOpen, handleDrawerClose, open, filter, handleFilterChange }}>
       <CssBaseline />
       <AppBar position='fixed' sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
@@ -76,32 +73,13 @@ export default function Home() {
           {matches ? (
             <Main open={open}>
               <Toolbar />
-              <FormControl fullWidth sx={{ mb: 2 }}>
-                <InputLabel id="demo-simple-select-label">Filter by</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={filter}
-                  label='Filter by'
-                  onChange={handleFilterChange}
-                >
-                  <MenuItem value=''><em>None</em></MenuItem>
-                  <MenuItem value='watched'>Watched</MenuItem>
-                  <MenuItem value='not-watched'>Not Watched</MenuItem>
-                    <ListSubheader>Director</ListSubheader>
-                    <MenuItem sx={{ pl: 4 }} value='hayao-miyazaki'>Hayao Miyazaki</MenuItem>
-                    <MenuItem sx={{ pl: 4 }} value='isao-takahata'>Isao Takahata</MenuItem>
-                    <MenuItem sx={{ pl: 4 }} value='yoshifumi-kondo'>Yoshifumi Kondō</MenuItem>
-                    <MenuItem sx={{ pl: 4 }} value='hiroyuki-morita'>Hiroyuki Morita</MenuItem>
-                    <MenuItem sx={{ pl: 4 }} value='goro-miyazaki'>Gorō Miyazaki</MenuItem>
-                </Select>
-              </FormControl>
-              <CardContainer open={open} />
+              <Filter />
+              <CardContainer />
             </Main>
           ) : (
             <Box sx={{ p: 3 }}>
               <Toolbar />
-              <CardContainer open={open} />
+              <CardContainer />
             </Box>
           )}
 
