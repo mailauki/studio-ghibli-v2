@@ -30,12 +30,12 @@ export default function CardContainer() {
 
   if (!films || films.length === 0) {
     return (
-      <Grid container spacing={1} sx={{ pl: 3, pr: 3, pb: 4 }}>
+      <Grid container spacing={2.15} sx={{ pl: 3, pr: 3, pb: 4, pt: 2 }}>
         {Array.from(Array(12)).map((_, index) =>
           <Grid
             key={index}
             item
-            xs={6} sm={4} md={3} lg={2}
+            xs={12} sm={6} md={4} lg={3} xl={2}
             sx={{ width: 'calc((100vw - 48px) / 3)' }}
           >
             <FilmCard film={undefined} />
@@ -46,9 +46,13 @@ export default function CardContainer() {
   }
 
   return (
-    <Grid container spacing={1} sx={{ pl: 3, pr: 3, pb: 4 }}>
+    <Grid container spacing={2.15} sx={{ pl: 3, pr: 3, pb: 4, pt: 2 }}>
       {filteredFilms.map((film: Film) => 
-        <Grid key={film.id} item xs={6} sm={4} md={3} lg={2}>
+        <Grid 
+          key={film.id} 
+          item
+          xs={12} sm={6} md={4} lg={3} xl={2}
+        >
           <FilmCard film={film} />
         </Grid>
       )}

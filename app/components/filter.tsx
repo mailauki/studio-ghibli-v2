@@ -14,7 +14,7 @@ export default function Filter() {
       elevation={0}
       color='inherit'
       component='div'
-      sx={{ pt: 2.5, pb: 2 }}
+      sx={{ pt: 2.5, pb: 1.5 }}
     >
       <Toolbar />
       <Toolbar>

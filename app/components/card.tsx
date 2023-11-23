@@ -39,8 +39,8 @@ export default function FilmCard({ film }: FilmProps) {
   }
 
   return (
-    <Card sx={{ position: 'relative', height: '100%' }}>
-      <CardActionArea onClick={handleFilmClick}>
+    <Card sx={{ position: 'relative', height: '100%', '&:hover': { transform: 'scale(1.05)' } }}>
+      <CardActionArea onClick={handleFilmClick} sx={{ height: '100%', flex: '1 1 auto', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
         <CardMedia
           component='img'
           src={film.image}
@@ -48,7 +48,7 @@ export default function FilmCard({ film }: FilmProps) {
         <CardHeader
           title={<Typography variant='body2'>{film.title}</Typography>}
           subheader={<Typography variant='body2' color='text.secondary'>{`${film.release_date} • ${film.director}`}</Typography>}
-          sx={{ flex: '1 1 auto' }}
+          sx={{ alignItems: 'flex-start', flex: '1 1 auto' }}
         />
       </CardActionArea>
       <CardActions sx={{ position: 'absolute', top: 0, p: 0 }}>
